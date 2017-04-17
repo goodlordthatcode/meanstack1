@@ -4,11 +4,6 @@ const jwt = require('jsonwebtoken');
 const router = express.Router();
 const User = require("../models/user");
 
-
-
-
-
-
 //Register endpoint
 router.post('/register', (req, res, next)=> {
     let newUser = new User({
@@ -30,7 +25,13 @@ router.post('/register', (req, res, next)=> {
 
 //Authentication endpoint
 router.post('/authenticate', (req, res, next)=> {
-    res.send('Authenticate page');
+    const username = req.body.username;
+    const passport = req.body.password;
+
+    User.getUserByUsername(username, (err, username) => {
+        if(err) throw err;
+        
+    })
 });
 
 //Profile endpoint

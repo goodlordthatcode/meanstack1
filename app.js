@@ -38,6 +38,12 @@ app.use(cors());
 app.use(express.static(path.join(__dirname, 'public')));
 //Body parser MiddleWare, used for accepting data from forms etc
 app.use(bodyParser.json());
+
+//passport Middleware
+app.use(passport.initialize());
+app.use(passport.session());
+require("./config/passport")(passport);
+
 // Any route with /users/ will redirect to the file users.
 app.use('/users', users);
 
@@ -46,8 +52,6 @@ app.use('/users', users);
 app.get('/', (req, res)=>{
     res.send('Error grabbing website, please try again.');
 });
-
-
 
 //Port for the server
 const port = 3000;
